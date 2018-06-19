@@ -1,1 +1,0 @@
-docker build -t kangooroo.azurecr.io/kangoogoweb-linux:latest .

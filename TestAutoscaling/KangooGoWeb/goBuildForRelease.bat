@@ -1,1 +1,1 @@
-go build -ldflags "-s -w"
+go build -o ./KangooGoWeb -ldflags "-s -w"

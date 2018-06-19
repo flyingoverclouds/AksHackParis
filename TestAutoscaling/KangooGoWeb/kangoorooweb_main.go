@@ -9,6 +9,8 @@ import (
 	"time"
 )
 
+var requestCount = 0
+
 type Page struct {
 	Title string
 	Body  []byte
@@ -24,6 +26,7 @@ func loadPage(title string) (*Page, error) {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
+	requestCount++
 	fmt.Printf("Request received : %s\n", r.URL)
 	fmt.Fprintf(w, "<html><head><title>Go title</title></head></head><body>")
 	fmt.Fprintf(w, "<h1>Hi there, I love %s!</h1>", r.URL.Path[1:])
@@ -31,7 +34,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "<b>OS</b>: [%s]<br/>", runtime.GOOS)
 	fmt.Fprintf(w, "<b>ARCH</b>: [%s]<br/>", runtime.GOARCH)
 	fmt.Fprintf(w, "<b>TIME</b>: [%s]<br/>", time.Now())
+	fmt.Fprintf(w, "<b>request</b>: #%d", requestCount)
 	fmt.Fprintf(w, "</body></html>")
+
+	// TODO : update prometheus metric with requestCount
 }
 
 func main() {
