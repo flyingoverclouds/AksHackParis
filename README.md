@@ -1,2 +1,2 @@
 # AksHackParis
-source code for AKS hackaton in Paris. 
+source code for hackaton in Paris. 
