@@ -48,7 +48,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	var port = ":8080"
+	var port = ":80"
 	fmt.Println("KangooGoWeb server starting ...")
 	fmt.Printf("running on OS: [%s]   Architecture: [%s]\n", runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("Listening on [%s]\n", port)

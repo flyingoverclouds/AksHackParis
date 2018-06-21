@@ -1,14 +1,14 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: kangooweb
+  name: kangooweb-deployment
 spec:
   replicas: 1
   strategy:
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 1
-  minReadySeconds: 5 
+  minReadySeconds: 10
   template:
     metadata:
       labels:
@@ -18,18 +18,19 @@ spec:
       - name: kangooweb
         image: kangooroo.azurecr.io/kangoogoweb-linux:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 80
         env:
         - name: LISTENINGPORT
-          value: ":8080"
+          value: ":80-unused value"
+        imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: kangooweb-test
+  name: kangooweb-svc
 spec:
   type: LoadBalancer
   ports:
-  - port: 8080
+  - port: 80
   selector:
     app: kangooweb
